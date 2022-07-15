@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTask } from './redux';
 
-const TaskForm = (props) => {
-  const [text, setText] = useState("");
+const TaskForm = () => {
+  const [text, setText] = useState('');
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-
-    props.addTask(text);
-
-    setText("");
+    dispatch(addTask(text));
+    setText('');
   };
 
   return (
@@ -17,7 +18,7 @@ const TaskForm = (props) => {
         type="text"
         placeholder="Ajouter une tâche"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={e => setText(e.target.value)}
       />
     </form>
   );
